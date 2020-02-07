@@ -1,3 +1,10 @@
+/* Задача к уроку №3
+Написать крипт, добавляющий в БД vk, которую создали на занятии, 3 новые таблицы 
+(с перечнем полей, указанием индексов и внешних ключей)
+*/
+
+-- выполнение строка 167
+
 DROP DATABASE IF EXISTS vk;
 CREATE DATABASE vk;
 USE vk;
@@ -156,3 +163,41 @@ CREATE TABLE photos (
     FOREIGN KEY (user_id) REFERENCES users(id) 
 ) COMMENT 'Фотографии';
 
+
+--  --------  домашнее задание к уроку №3 -------------
+
+-- добавим аудиозаписи, альбомы и плэйлисты, в таблице с audio_tracks делаем ссылку на таблицу media там есть все метаданные
+DROP TABLE IF EXISTS playlists;
+CREATE TABLE playlists (
+	id SERIAL PRIMARY KEY,
+    `name` VARCHAR(255) DEFAULT NULL,   -- название плэйлиста
+	user_id BIGINT UNSIGNED NOT NULL,    -- чей плэйлист ссылается на поле id таблицы users
+	
+    INDEX(user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) COMMENT 'Плэйлисты';
+
+DROP TABLE IF EXISTS audio_albums;
+CREATE TABLE audio_albums (
+	id SERIAL PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,   -- название альбома
+    year_release YEAR NOT NULL,   -- год релиза
+    executor VARCHAR(100),   -- исполнитель
+	   
+	INDEX (`name`),
+    INDEX (executor)
+) COMMENT 'Музыкальный альбом';
+
+DROP TABLE IF EXISTS audio_tracks;
+CREATE TABLE audio_tracks (
+	id SERIAL PRIMARY KEY,
+    album_id BIGINT UNSIGNED NULL,   --  ссылаемся на Музыкальный альбом  NOT Null не надо
+	media_id BIGINT UNSIGNED NOT NULL,   --  сохраним инфу о файле- ссылка на medi, но лучше сделать отдельную таблицу file_info с авторами и т.д.
+	user_id BIGINT UNSIGNED NOT NULL,    -- кто выложил трек ссылается на поле id таблицы users
+    
+    FOREIGN KEY (media_id) REFERENCES media(id),
+    FOREIGN KEY (album_id) REFERENCES audio_albums(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) 
+) COMMENT 'Аудио трэк';
+
+--  можно также добавить видеозаписи, комментарии к постам и таблички подписок юзеров к сообществам

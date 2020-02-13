@@ -8,4 +8,4 @@ USE vk;
 
 SELECT firstname FROM users GROUP BY firstname ORDER BY firstname ASC;
 -- выбрать firstname из таблицы vk.users  без повторений в колонке firstname отсортировать firstname по возрастанию.
--- из 100 users выбирает уникальных 97 и сортирует по возрастанию.
+-- из 100 users выбирает уникальных 93 и сортирует по возрастанию.

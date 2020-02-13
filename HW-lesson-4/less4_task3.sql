@@ -1,3 +1,4 @@
+
 /* Задача №3 к уроку №4
  Написать скрипт, отмечающий несовершеннолетних пользователей как неактивных (поле is_active = false). 
  Предварительно добавить такое поле в таблицу profiles со значением по умолчанию = true (или 1)
@@ -16,3 +17,6 @@ UPDATE `vk`.`profiles`
 SET `is_active` = 'false' 
 WHERE `is_active` = 'true' 
 AND (YEAR(CURRENT_DATE)-YEAR(`birthday`))-(RIGHT(CURRENT_DATE,5)<RIGHT(`birthday`,5)) < 18;
+
+-- изменил 40 строк
+SELECT *  FROM `vk`.`profiles`;

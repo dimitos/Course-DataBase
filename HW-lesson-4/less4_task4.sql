@@ -1,9 +1,10 @@
+
 /* Задача №4 к уроку №4
  Написать скрипт, удаляющий сообщения «из будущего» (дата позже сегодняшней)
 */
 
 USE vk;
--- в таблице messages 70 сообщений
+-- в таблице messages 200 сообщений
 -- сначала сделаем пару подобных строчек
 UPDATE `vk`.`messages` SET `created_at` = '2022-01-16 17:46:53' WHERE (`id` = '10');
 UPDATE `vk`.`messages` SET `created_at` = '2020-03-09 01:04:45' WHERE (`id` = '28');
@@ -13,4 +14,6 @@ UPDATE `vk`.`messages` SET `created_at` = '2020-12-29 03:41:48' WHERE (`id` = '5
 
 -- а теперь удалим их
  DELETE FROM messages WHERE created_at > NOW();
- -- осталось 66 сообщений
+ -- осталось 196 сообщений
+ 
+ SELECT * FROM vk.messages;

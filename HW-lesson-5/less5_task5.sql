@@ -1,6 +1,6 @@
-/* Задача N4
-	Из таблицы users необходимо извлечь пользователей, родившихся в августе и мае. 
-    Месяцы заданы в виде списка английских названий ('may', 'august')
+/* Задача N5
+	Из таблицы catalogs извлекаются записи при помощи запроса. SELECT * FROM catalogs WHERE id IN (5, 1, 2); 
+    Отсортируйте записи в порядке, заданном в списке IN.
 */
 
 
@@ -9,14 +9,14 @@ CREATE DATABASE example;
 USE example;
 
 # есть таблица юзеров
-CREATE TABLE users (
+CREATE TABLE catalogs (
 id SERIAL PRIMARY KEY,
 firstname VARCHAR(255),
 birthday DATE NOT NULL
-) COMMENT = 'Пользователи';
+) COMMENT = 'каталог пользователей';
 
-# заносим даты рождения
-INSERT INTO `users` 
+# занполняем каталог
+INSERT INTO `catalogs` 
 VALUES 
 ('1','Nella','2000-09-06'),
 ('2','Cathryn','2003-01-27'),
@@ -37,12 +37,11 @@ VALUES
 ('17','Henriette','1989-05-09'),
 ('18','Osborne','1988-04-28');
 
-# выводим возрастающую очередность д/р юзеров, родившихся в may и august. 
+# отсортировать записи в порядке, заданном в списке IN
+SELECT * FROM catalogs 
+	WHERE id IN (5, 1, 14, 2)
+    ORDER BY FIND_IN_SET(id, '5,1,14,2');
+
+
     
-SELECT 
-	*,
-    monthname(birthday)
-	AS `Месяц` 
-FROM users 
-	WHERE monthname(birthday) IN ('may','august')
-    ORDER BY DATE_FORMAT(STR_TO_DATE(`birthday`, '%Y-%m-%d'),'2020-%m-%d') ASC;
+

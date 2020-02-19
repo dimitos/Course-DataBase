@@ -34,6 +34,6 @@ INSERT INTO `users` VALUES
 ('15','Lyric',NULL,NULL); 
   
 UPDATE `example`.`users` SET `creat_at` = now();
-UPDATE `example`.`users` SET `updated_at`= now();
+UPDATE `example`.`users` SET `updated_at`= CURRENT_TIMESTAMP;
 
 SELECT * FROM users;

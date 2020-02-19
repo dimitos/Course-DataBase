@@ -41,7 +41,11 @@ VALUES
 SELECT * FROM catalogs 
 	WHERE id IN (5, 1, 14, 2)
     ORDER BY FIND_IN_SET(id, '5,1,14,2');
-
+    
+# второй вариант
+SELECT * FROM catalogs 
+	WHERE id IN (5, 1, 14, 2)
+    ORDER BY FIELD(id, 5, 1, 14, 2);
 
     
 

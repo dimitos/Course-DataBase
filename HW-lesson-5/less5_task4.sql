@@ -46,3 +46,18 @@ SELECT
 FROM users 
 	WHERE monthname(birthday) IN ('may','august')
     ORDER BY DATE_FORMAT(STR_TO_DATE(`birthday`, '%Y-%m-%d'),'2020-%m-%d') ASC;
+ 
+ 
+ 
+SELECT 
+	*,
+    monthname(birthday)
+	AS `month` 
+FROM users 
+	having `month` IN ('may','august')
+    ORDER BY DATE_FORMAT(`birthday`, '%m') ASC;
+    
+    
+    
+SELECT * FROM users where DATE_FORMAT(`birthday`, '%M') IN ('may','august');
+

@@ -38,8 +38,8 @@ VALUES
 
 # вычисляем возрасты пользователеё, суммируем их, делим эту сумму на количество строк в таблице, округляем
 # до десятых и выводим.
-SELECT 
-	ROUND(
-		SUM((YEAR(CURRENT_DATE)-YEAR(`birthday`))-(RIGHT(CURRENT_DATE,5)<RIGHT(`birthday`,5)))/COUNT(*), 1
-    )
-	AS `Средний возраст пользователей` FROM users;
+SELECT ROUND(SUM((YEAR(CURRENT_DATE)-YEAR(`birthday`))-(RIGHT(CURRENT_DATE,5)<RIGHT(`birthday`,5)))/COUNT(*), 1) AS `Средний возраст пользователей` FROM users;
+    
+# второй вариант 
+SELECT round(avg(timestampdiff(YEAR, birthday, now())), 1) AS `Средний возраст пользователей` FROM users;
+

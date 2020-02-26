@@ -39,3 +39,26 @@ AND (YEAR(CURRENT_DATE)-YEAR(`birthday`))-(RIGHT(CURRENT_DATE,5)<RIGHT(`birthday
 -- зменил 60 строк открыли доступ 60 пользователям
 SELECT *  FROM `vk`.`profiles`;
 
+
+-- -------------------еще вариант--------------------------
+-- добавим флаг is_active 
+ALTER TABLE vk.profiles 
+ADD COLUMN is_active BIT DEFAULT 1;
+
+-- сделать невовершеннолетних неактивными
+update profiles
+set is_active = 0
+where (birthday + INTERVAL 18 YEAR) > now();
+
+-- проверим не активных
+select *
+from profiles
+where is_active = 0
+order by birthday;
+
+-- проверим активных
+select *
+from profiles
+where is_active = 1
+order by birthday;
+

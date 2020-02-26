@@ -47,5 +47,25 @@ SELECT
 	sum(WEEKDAY(DATE_FORMAT(STR_TO_DATE(`birthday`, '%Y-%m-%d'),'2020-%m-%d'))='5') AS `Суббота`,
 	sum(WEEKDAY(DATE_FORMAT(STR_TO_DATE(`birthday`, '%Y-%m-%d'),'2020-%m-%d'))='6') AS `Воскресенье`  
 FROM users ;
-
 -- select *, weekday(DATE_FORMAT(STR_TO_DATE(`birthday`, '%Y-%m-%d'),'2020-%m-%d')) AS `WEEKDAY` from `users`; 
+
+#--------- второй вариант ----------------------
+select year(now()), month(birthday), day(birthday) FROM users;
+select concat_ws('-', year(now()), month(birthday), day(birthday)) AS `day`  FROM users;
+select date(concat_ws('-', year(now()), month(birthday), day(birthday))) AS `day`  FROM users;
+select date_format(date(concat_ws('-', year(now()), month(birthday), day(birthday))), '%W') AS `day`  FROM users;
+
+-- группируем 
+SELECT
+	date_format(date(concat_ws('-', year(now()), month(`birthday`), day(`birthday`))), '%W') AS `day`,
+    count(*) AS `total`
+FROM 
+	`users` 
+GROUP BY 
+	`day`
+ORDER BY
+	`total` DESC;
+
+
+
+

@@ -11,8 +11,8 @@ USE example;
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 name VARCHAR(255),
-creat_at VARCHAR(255) NULL,
-updated_at VARCHAR(255) NULL
+creat_at DATETIME,
+updated_at DATETIME
 ) COMMENT = 'Пользователи';
 
 
@@ -33,7 +33,6 @@ INSERT INTO `users` VALUES
 ('14','Brandi',NULL,NULL),
 ('15','Lyric',NULL,NULL); 
   
-UPDATE `example`.`users` SET `creat_at` = now();
-UPDATE `example`.`users` SET `updated_at`= CURRENT_TIMESTAMP;
+UPDATE `example`.`users` SET `creat_at` = now(), `updated_at`= CURRENT_TIMESTAMP;
 
 SELECT * FROM users;

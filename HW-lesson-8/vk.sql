@@ -1,8 +1,6 @@
 /* 
 Создаем базу vk
-
 */
-
 
 DROP DATABASE IF EXISTS vk;
 CREATE DATABASE vk;
@@ -1316,22 +1314,6 @@ ADD COLUMN `is_active` BIT DEFAULT 1;  -- по умолчанию присваи
 -- заменим 1 на 0 в тех строчках, где возраст меньше 18
 UPDATE `vk`.`profiles` SET `is_active` = 0 WHERE (`birthday` + INTERVAL 18 YEAR) > now();
 
--- ==============================================================================================================================================================
--- Задача №4 к уроку №4
--- в таблице messages 200 сообщений
--- сначала сделаем пару подобных строчек
-UPDATE `vk`.`messages` SET `created_at` = '2022-01-16 17:46:53' WHERE (`id` = '10');
-UPDATE `vk`.`messages` SET `created_at` = '2020-03-09 01:04:45' WHERE (`id` = '28');
-UPDATE `vk`.`messages` SET `created_at` = '2021-07-14 23:11:27' WHERE (`id` = '36');
-UPDATE `vk`.`messages` SET `created_at` = '2020-12-29 03:41:48' WHERE (`id` = '51');
-
--- добавим столбец флаг удаленное сообщение
-ALTER TABLE `vk`.`messages` 
-ADD COLUMN `is_deleted` BIT DEFAULT 0;
-
-UPDATE `vk`.`messages` SET `is_deleted` = 1 WHERE `created_at` > now();
- 
--- ==============================================================================================================================================================
 
 
 

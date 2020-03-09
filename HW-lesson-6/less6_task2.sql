@@ -29,4 +29,16 @@ WHERE `media_id` IN
 
 
 
-
+select count(*) -- количество лайков
+from likes
+where media_id in ( -- все медиа записи таких пользователей
+	select id 
+	from media 
+	where user_id in ( -- все пользователи младше 10 лет
+		select 
+			user_id
+		-- 	, birthday
+		from profiles as p
+		where  YEAR(CURDATE()) - YEAR(birthday) < 10
+	)
+);

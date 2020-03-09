@@ -33,6 +33,19 @@ SELECT
 		ELSE 'у мужчин иженщин одинаково'
 	END AS 'Количество лайков';  
 
-
+select 
+	gender,
+    count(*)
+from (
+	select 
+		user_id as user,
+		(
+			select gender 
+			from vk.profiles
+			where user_id = user
+		) as gender
+	from likes
+) as d
+group by gender;
 
 

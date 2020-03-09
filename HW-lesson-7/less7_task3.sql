@@ -53,6 +53,24 @@ SELECT
 	(SELECT `name` FROM `cities` WHERE `label` = `flights`.`to`) AS 'to'
 FROM `flights`;
 
+SELECT
+	id,
+    cf.`name` AS 'from',
+    ct.`name` AS `to`
+FROM
+	`flights` AS f
+JOIN
+	`cities` AS cf
+ON 
+	f.`from` = cf.`label`
+JOIN
+	`cities` AS ct
+ON 
+	f.`to` = ct.`label`
+ORDER BY f.`id`;
+
+    
+
 
 
 

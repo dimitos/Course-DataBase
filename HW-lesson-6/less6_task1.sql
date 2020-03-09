@@ -51,5 +51,14 @@ LIMIT 1;                        -- и оставляем только перву
 
 # задание выполнено, в моей базе это №74.
 
-
+select 
+	from_user_id
+	, concat(u.firstname, ' ', u.lastname) as name
+	, count(*) as 'messages count'
+from messages m
+join users u on u.id = m.from_user_id
+where to_user_id = 30
+group by from_user_id
+order by count(*) desc
+limit 1;
 

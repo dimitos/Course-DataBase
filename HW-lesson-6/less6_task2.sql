@@ -42,3 +42,20 @@ where media_id in ( -- все медиа записи таких пользов�
 		where  YEAR(CURDATE()) - YEAR(birthday) < 10
 	)
 );
+
+
+SELECT
+	count(*) 'Общее количество полученных лайков пользователями младше 10 лет'
+FROM likes l
+JOIN media m ON l.media_id = m.id
+JOIN profiles p ON p.user_id = m.user_id
+WHERE YEAR(CURDATE()) - YEAR(birthday) < 10;
+
+
+
+
+
+
+
+
+
